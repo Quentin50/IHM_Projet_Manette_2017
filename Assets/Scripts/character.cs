@@ -5,11 +5,12 @@ using UnityEngine;
 public class character : MonoBehaviour {
 
     bool dessus, dessous, gauche, droite;
-    bool possible;
+    float time;
+    public float gpower;
 
     public void jump()
     {
-        if (possible) ;
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,27 +28,38 @@ public class character : MonoBehaviour {
         gauche = (pos1.x < pos2.x)&& (Mathf.Abs(pos1.y - pos2.y) < Mathf.Abs(y1 - y2));
         droite = (pos1.x > pos2.x) && (Mathf.Abs(pos1.y - pos2.y) < Mathf.Abs(y1 - y2)); ;
 
-       
-        //if (dessus) {
 
-        //    //this.transform.position = new Vector3(this.transform.position.x,pos2.y + y2+y1,this.transform.position.z);
-        //} else if (dessous)
-        //{
-        //    //this.transform.position = new Vector3(this.transform.position.x, pos2.y - y2 -y1, this.transform.position.z);
-        //} else if (gauche)
-        //{
-        //    //this.transform.position = new Vector3( pos2.x - x2 -x1,this.transform.position.x, this.transform.position.z);
-        //} else if (droite)
-        //{
-        //    //this.transform.position = new Vector3(pos2.x + x2 +x1, this.transform.position.x, this.transform.position.z);
-        //}
+        if (dessus)
+        {
 
-        print("OntriggerEnter");
+            this.transform.position = new Vector3(this.transform.position.x,pos2.y + y2+y1,this.transform.position.z);
+            print("dessus");
+        }
+        else if (dessous)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, pos2.y - y2 -y1, this.transform.position.z);
+            print("dessous");
+        }
+        else if (gauche)
+        {
+            this.transform.position = new Vector3( pos2.x - x2 -x1,this.transform.position.x, this.transform.position.z);
+            print("gauche");
+        }
+        else if (droite)
+        {
+            this.transform.position = new Vector3(pos2.x + x2 +x1, this.transform.position.x, this.transform.position.z);
+            print("droite");
+        }
+
+        print("OnCollisionEnter");
     }
 
-    private void updatebools()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-
+        dessus = false;
+        dessous = false;
+        gauche = false;
+        droite = false;
     }
 
 
@@ -73,15 +85,24 @@ public class character : MonoBehaviour {
 
     void gravity()
     {
-
+        if (!dessus)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - time * time * gpower / 2, this.transform.position.z);
+            time += Time.deltaTime;
+        } else
+        {
+            time = 0;
+        }
+        
     }
     // Use this for initialization
     void Start () {
-        possible = true;
+        dessus = false;
+        time = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        gravity();
 	}
 }

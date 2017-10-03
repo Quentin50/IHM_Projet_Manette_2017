@@ -27,7 +27,7 @@ public class input_controller : MonoBehaviour {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        if (((h < 0) && (!this.GetComponent<character>().getdroite()))||((h>0)&&(!this.GetComponent<character>().getgauche())))
+        if (((h < 0) && (!this.GetComponent<character>().getdroite())) || ((h > 0) && (!this.GetComponent<character>().getgauche())))
         {
             this.gameObject.transform.position = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * 5, 0, 0);
         }
@@ -37,16 +37,17 @@ public class input_controller : MonoBehaviour {
         }
         //if (h != 0 || v != 0)
         //{
-        //    Vector3 pos = this.gameObject.transform.position + new Vector3(h*Time.deltaTime*5, v*Time.deltaTime*5, 0);
+        //    Vector3 pos = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * 5, v * Time.deltaTime * 5, 0);
         //    //pos.x = Mathf.Clamp(pos.x, -4, 4);
         //    //pos.y = Mathf.Clamp(pos.y, -4, 4);
         //    this.gameObject.transform.position = pos;
-        //} else
+        //}
+        //else
         //{
 
-            //}
+
+        //}
     }
-    
 
 	// Use this for initialization
 	void Start () {
