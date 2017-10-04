@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class character : MonoBehaviour {
 
+    private float height, width;
+    public float distance;
     bool dessus, dessous, gauche, droite;
     float time;
     public float gpower;
@@ -54,6 +56,27 @@ public class character : MonoBehaviour {
         print("OnCollisionEnter");
     }
 
+    void collisionhandler()
+    {
+        bool ray1 = Physics.Raycast(transform.position + new Vector3(-width,height,0), new Vector3(-1, 0, 0), distance);
+        bool ray2 = Physics.Raycast(transform.position + new Vector3(-width, 0, 0), new Vector3(-1, 0, 0), distance);
+        bool ray3 = Physics.Raycast(transform.position + new Vector3(-width, -height, 0), new Vector3(-1, 0, 0), distance);
+
+        bool ray4 = Physics.Raycast(transform.position + new Vector3(width, height, 0), new Vector3(1, 0, 0), distance);
+        bool ray5 = Physics.Raycast(transform.position + new Vector3(width, 0, 0), new Vector3(1, 0, 0), distance);
+        bool ray6 = Physics.Raycast(transform.position + new Vector3(width, -height, 0), new Vector3(1, 0, 0), distance);
+
+        bool ray7 = Physics.Raycast(transform.position + new Vector3(width, -height, 0), new Vector3(0, -1, 0), distance);
+        bool ray8 = Physics.Raycast(transform.position + new Vector3(0, -height, 0), new Vector3(0, -1, 0), distance);
+        bool ray9 = Physics.Raycast(transform.position + new Vector3(-width, -height, 0), new Vector3(0, -1, 0), distance);
+
+        if (ray1 || ray2 || ray3)
+        {
+            this.transform.position = new Vector3()
+        }
+
+    }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         dessus = false;
@@ -97,6 +120,8 @@ public class character : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        width = this.gameObject.GetComponent<Collider2D>().bounds.size.x/2;
+        height = this.gameObject.GetComponent<Collider2D>().bounds.size.y/2;
         dessus = false;
         time = 0;
 	}
