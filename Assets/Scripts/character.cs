@@ -11,15 +11,17 @@ public class character : MonoBehaviour {
     float VerticalSpeed;
     public float g;
     public float jumpPower;
+    public float anticipateJump;
     float time;
+    public float offset1, offset2;
 
 
 
     public float CollisionLeft()
     {
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(-width + 0.1f, height - 0.1f, 0), new Vector3(-1, 0, 0));
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(-width + 0.1f, 0, 0), new Vector3(-1, 0, 0));
-        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(-width + 0.1f, -height + 0.1f, 0), new Vector3(-1, 0, 0));
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(-width + offset1, height - offset1, 0), new Vector3(-1, 0, 0));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(-width + offset1, 0, 0), new Vector3(-1, 0, 0));
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position + new Vector3(-width + offset1, -height + offset1, 0), new Vector3(-1, 0, 0));
 
         Debug.DrawRay(transform.position + new Vector3(-width, height, 0), new Vector3(-1, 0, 0));
         Debug.DrawRay(transform.position + new Vector3(-width, 0, 0), new Vector3(-1, 0, 0));
@@ -47,16 +49,16 @@ public class character : MonoBehaviour {
             //print("detect 3 !");
         }
 
-        float minX = Mathf.Max(val1, val2, val3) + width + 0.35f;
+        float minX = Mathf.Max(val1, val2, val3) + width + offset2;
 
         return minX;
     }
 
     public float CollisionRight()
     {
-        RaycastHit2D hit4 = Physics2D.Raycast(transform.position + new Vector3(width - 0.1f, height - 0.1f, 0), new Vector3(1, 0, 0));
-        RaycastHit2D hit5 = Physics2D.Raycast(transform.position + new Vector3(width - 0.1f, 0, 0), new Vector3(1, 0, 0));
-        RaycastHit2D hit6 = Physics2D.Raycast(transform.position + new Vector3(width - 0.1f, -height + 0.1f, 0), new Vector3(1, 0, 0));
+        RaycastHit2D hit4 = Physics2D.Raycast(transform.position + new Vector3(width - offset1, height - offset1, 0), new Vector3(1, 0, 0));
+        RaycastHit2D hit5 = Physics2D.Raycast(transform.position + new Vector3(width - offset1, 0, 0), new Vector3(1, 0, 0));
+        RaycastHit2D hit6 = Physics2D.Raycast(transform.position + new Vector3(width - offset1, -height + offset1, 0), new Vector3(1, 0, 0));
 
         Debug.DrawRay(transform.position + new Vector3(width, height, 0), new Vector3(1, 0, 0));
         Debug.DrawRay(transform.position + new Vector3(width, 0, 0), new Vector3(1, 0, 0));
@@ -83,16 +85,16 @@ public class character : MonoBehaviour {
             //print("detect 6 !");
         }
 
-        float maxX = Mathf.Min(val4, val5, val6) - width - 0.35f;
+        float maxX = Mathf.Min(val4, val5, val6) - width - offset2;
 
         return maxX;
     }
 
     public float CollisionUp()
     {
-        RaycastHit2D hit10 = Physics2D.Raycast(transform.position + new Vector3(width - 0.1f, height - 0.1f, 0), new Vector3(0, 1, 0));
-        RaycastHit2D hit11 = Physics2D.Raycast(transform.position + new Vector3(0, height - 0.1f, 0), new Vector3(0, 1, 0));
-        RaycastHit2D hit12 = Physics2D.Raycast(transform.position + new Vector3(-width + 0.1f, height - 0.1f, 0), new Vector3(0, 1, 0));
+        RaycastHit2D hit10 = Physics2D.Raycast(transform.position + new Vector3(width - offset1, height - offset1, 0), new Vector3(0, 1, 0));
+        RaycastHit2D hit11 = Physics2D.Raycast(transform.position + new Vector3(0, height - offset1, 0), new Vector3(0, 1, 0));
+        RaycastHit2D hit12 = Physics2D.Raycast(transform.position + new Vector3(-width + offset1, height - offset1, 0), new Vector3(0, 1, 0));
 
         Debug.DrawRay(transform.position + new Vector3(width, height, 0), new Vector3(0, 1, 0));
         Debug.DrawRay(transform.position + new Vector3(0, height, 0), new Vector3(0, 1, 0));
@@ -117,16 +119,16 @@ public class character : MonoBehaviour {
             //print("detect 12 !");
         }
 
-        float maxY = Mathf.Min(val10, val11, val12) - height - 0.35f;
+        float maxY = Mathf.Min(val10, val11, val12) - height - offset2;
 
         return maxY;
     }
 
     public float CollisionDown()
     {
-        RaycastHit2D hit7 = Physics2D.Raycast(transform.position + new Vector3(width - 0.1f, -height + 0.1f, 0), new Vector3(0, -1, 0));
-        RaycastHit2D hit8 = Physics2D.Raycast(transform.position + new Vector3(0, -height + 0.1f, 0), new Vector3(0, -1, 0));
-        RaycastHit2D hit9 = Physics2D.Raycast(transform.position + new Vector3(-width + 0.1f, -height + 0.1f, 0), new Vector3(0, -1, 0));
+        RaycastHit2D hit7 = Physics2D.Raycast(transform.position + new Vector3(width - offset1, -height + offset1, 0), new Vector3(0, -1, 0));
+        RaycastHit2D hit8 = Physics2D.Raycast(transform.position + new Vector3(0, -height + offset1, 0), new Vector3(0, -1, 0));
+        RaycastHit2D hit9 = Physics2D.Raycast(transform.position + new Vector3(-width + offset1, -height + offset1, 0), new Vector3(0, -1, 0));
 
         Debug.DrawRay(transform.position + new Vector3(width, -height, 0), new Vector3(0, -1, 0));
         Debug.DrawRay(transform.position + new Vector3(0, -height, 0), new Vector3(0, -1, 0));
@@ -151,9 +153,9 @@ public class character : MonoBehaviour {
             //print("detect 9 !");
         }
 
-        float minY = Mathf.Max(val7, val8, val9) + height + 0.35f;
+        float minY = Mathf.Max(val7, val8, val9) + height + offset2;
 
-        if (this.gameObject.transform.position.y - minY < 0.02)
+        if (this.gameObject.transform.position.y - minY < anticipateJump)
         {
             landed = true;
             print("landed true");
@@ -353,8 +355,8 @@ public class character : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        width = this.gameObject.GetComponent<Collider2D>().bounds.size.x/2;
-        height = this.gameObject.GetComponent<Collider2D>().bounds.size.y/2;
+        width = this.gameObject.GetComponent<Renderer>().bounds.size.x/2;
+        height = this.gameObject.GetComponent<Renderer>().bounds.size.y/2;
         time = 0;
         distance = 15f;
         landed = false;

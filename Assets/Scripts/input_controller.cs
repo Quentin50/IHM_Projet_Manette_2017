@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class input_controller : MonoBehaviour { 
 
-    void inputColor()
-    {
-        if (Input.GetButton("Fire1"))
-        {
-            //this.gameObject.GetComponent<Renderer>().material.color = Color.green;
+    //void inputColor()
+    //{
+    //    if (Input.GetButton("Fire1"))
+    //    {
+    //        //this.gameObject.GetComponent<Renderer>().material.color = Color.green;
            
-        } else if (Input.GetButton("Fire2"))
-        {
-            this.gameObject.GetComponent<Renderer>().material.color = Color.red;
-        } else if (Input.GetButton("Fire3"))
-        {
-            this.gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        } else if (Input.GetButton("Jump"))
-        {
-            this.gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-        }
-    }
+    //    } else if (Input.GetButton("Fire2"))
+    //    {
+    //        this.gameObject.GetComponent<Renderer>().material.color = Color.red;
+    //    } else if (Input.GetButton("Fire3"))
+    //    {
+    //        this.gameObject.GetComponent<Renderer>().material.color = Color.blue;
+    //    } else if (Input.GetButton("Jump"))
+    //    {
+    //        this.gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+    //    }
+    //}
 
     void inputMoveJoystick()
     {
