@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,13 +23,43 @@ public class input_controller : MonoBehaviour {
     //        this.gameObject.GetComponent<Renderer>().material.color = Color.yellow;
     //    }
     //}
+    struct CrossJump
+    {
+        public bool ready;
+        private bool jumpThisFrame;
+        public void checkSiLaToucheEstRelachee()
+        {
+            if (Input.GetAxis("Jump Cross") <= 0) ready = true;
+            else
+            {
+                if (ready == true)
+                {
+                    ready = false;
+                    jumpThisFrame = true;
+                }
+            }
+        }
+
+        public bool jumpOrder()
+        {
+            if (jumpThisFrame)
+            {
+                jumpThisFrame = false;
+                return true;
+            }
+            else return false;
+        }
+    };
+    CrossJump crossJump;
 
     void inputMoveJoystick()
     {
-        float h = Input.GetAxis("Horizontal Keyboard arrows") + Input.GetAxis("Horizontal Keyboard zqsd") + Input.GetAxis("Horizontal Joystick");
+        crossJump.checkSiLaToucheEstRelachee();
+        float h = Input.GetAxis("Horizontal Keyboard arrows") + Input.GetAxis("Horizontal Keyboard zqsd") + Input.GetAxis("Horizontal Joystick") + Input.GetAxis("Horizontal Cross");
         //float v = Input.GetAxis("Vertical");
-        if (Input.GetButtonDown("Jump arrows") || Input.GetButtonDown("Jump zqsd") || Input.GetButtonDown("Jump A") || Input.GetAxis("Jump Cross") > 0)
+        if (Input.GetButtonDown("Jump arrows") || Input.GetButtonDown("Jump zqsd") || Input.GetButtonDown("Jump A") || crossJump.jumpOrder())
         {
+            
             this.GetComponent<character>().jump();
             this.GetComponent<character>().landed = false;
         }
