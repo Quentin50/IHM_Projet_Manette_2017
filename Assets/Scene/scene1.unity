@@ -443,7 +443,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1175270182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.54, y: -3.38, z: -1}
+  m_LocalPosition: {x: -3.23, y: 0.65, z: -1}
   m_LocalScale: {x: 0.2710899, y: 0.25679907, z: 1.0427927}
   m_Children: []
   m_Father: {fileID: 0}
@@ -461,8 +461,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
-  g: 100
-  jumpPower: 0
+  landed: 0
+  g: 1
+  jumpPower: 0.2
+  doubleJumpPower: 0.3
+  anticipateJump: 0.5
+  offset1: 0.05
+  offset2: 0.05
 --- !u!114 &1175270188
 MonoBehaviour:
   m_ObjectHideFlags: 0

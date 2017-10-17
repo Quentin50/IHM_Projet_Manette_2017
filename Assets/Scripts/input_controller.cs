@@ -25,9 +25,9 @@ public class input_controller : MonoBehaviour {
 
     void inputMoveJoystick()
     {
-        float h = Input.GetAxis("Horizontal");
+        float h = Input.GetAxis("Horizontal Keyboard arrows") + Input.GetAxis("Horizontal Keyboard zqsd") + Input.GetAxis("Horizontal Joystick");
         //float v = Input.GetAxis("Vertical");
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump arrows") || Input.GetButtonDown("Jump zqsd") || Input.GetButtonDown("Jump A") || Input.GetAxis("Jump Cross") > 0)
         {
             this.GetComponent<character>().jump();
             this.GetComponent<character>().landed = false;
