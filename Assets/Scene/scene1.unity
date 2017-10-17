@@ -258,6 +258,16 @@ Prefab:
       propertyPath: Speed.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114636984758482122, guid: cb7a63497430489478fb70e9ad618b5e,
+        type: 2}
+      propertyPath: XOscilDist
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114636984758482122, guid: cb7a63497430489478fb70e9ad618b5e,
+        type: 2}
+      propertyPath: YOscilDist
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb7a63497430489478fb70e9ad618b5e, type: 2}
   m_IsPrefabParent: 0
