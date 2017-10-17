@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class input_controller : MonoBehaviour { 
+public class input_controller : MonoBehaviour {
 
+    
     //void inputColor()
     //{
     //    if (Input.GetButton("Fire1"))
@@ -46,7 +47,7 @@ public class input_controller : MonoBehaviour {
         float maxY = this.gameObject.GetComponent<character>().CollisionUp();
         if (h != 0)
         {
-            print("input");
+            //print("input");
             Vector3 pos = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * 5, this.gameObject.GetComponent<character>().getVerticalSpeed(), 0);
             pos.x = Mathf.Clamp(pos.x, minX, maxX);
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
@@ -64,13 +65,13 @@ public class input_controller : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
         this.gameObject.GetComponent<Renderer>().material.color = Color.white;
-        inputColor();
+        //inputColor();
         inputMoveJoystick();
 	}
 }
