@@ -61,7 +61,6 @@ public class input_controller : MonoBehaviour {
         {
             
             this.GetComponent<character>().jump();
-            this.GetComponent<character>().landed = false;
         }
 
         //if (((h < 0) && (!this.GetComponent<character>().getdroite())) || ((h > 0) && (!this.GetComponent<character>().getgauche())))
@@ -79,14 +78,14 @@ public class input_controller : MonoBehaviour {
         if (h != 0)
         {
             //print("input");
-            Vector3 pos = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * 5, this.gameObject.GetComponent<character>().getVerticalSpeed(), 0);
+            Vector3 pos = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * 5 + this.gameObject.GetComponent<character>().getHorizontalSpeed(), this.gameObject.GetComponent<character>().getVerticalSpeed(), 0);
             pos.x = Mathf.Clamp(pos.x, minX, maxX);
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
             this.gameObject.transform.position = pos;
         } else
         {
             Vector3 pos = this.gameObject.transform.position;
-            pos.x = Mathf.Clamp(this.gameObject.transform.position.x, minX, maxX);
+            pos.x = Mathf.Clamp(this.gameObject.transform.position.x + this.gameObject.GetComponent<character>().getHorizontalSpeed(), minX, maxX);
             pos.y = Mathf.Clamp(this.gameObject.transform.position.y + this.gameObject.GetComponent<character>().getVerticalSpeed(), minY, maxY);
             this.gameObject.transform.position = pos;
             

@@ -7,11 +7,11 @@ public class character : MonoBehaviour {
     private float height, width;
     public float distance;
     bool dessus, dessous, gauche, droite;
-    public bool landed;
-    float VerticalSpeed;
+    bool landed, right, left;
+    float VerticalSpeed, horizontalSpeed;
     public float g;
-    public float jumpPower, doubleJumpPower;
-    public float anticipateJump;
+    public float jumpPower, doubleJumpPower, jumpPowerSide;
+    public float anticipateJump,anticipateJumpSide;
     float time;
     public float offset1, offset2;
     private int jumpcount;
@@ -52,6 +52,16 @@ public class character : MonoBehaviour {
 
         float minX = Mathf.Max(val1, val2, val3) + width + offset2;
 
+        if (this.gameObject.transform.position.x - minX <= anticipateJumpSide)
+        {
+            right = true;
+            print("right true");
+        }
+        else
+        {
+            right = false;
+        }
+
         return minX;
     }
 
@@ -87,6 +97,16 @@ public class character : MonoBehaviour {
         }
 
         float maxX = Mathf.Min(val4, val5, val6) - width - offset2;
+
+        if (maxX - this.gameObject.transform.position.x <= anticipateJumpSide)
+        {
+            left = true;
+            print("left true");
+        }
+        else
+        {
+            left = false;
+        }
 
         return maxX;
     }
@@ -159,8 +179,13 @@ public class character : MonoBehaviour {
         if (this.gameObject.transform.position.y - minY <= anticipateJump)
         {
             landed = true;
+            horizontalSpeed = 0;
             //print("landed true");
-            jumpcount = 2;
+            if (this.VerticalSpeed <= 0)
+            {
+                jumpcount = 2;
+            }
+           
             
         } else
         {
@@ -204,26 +229,56 @@ public class character : MonoBehaviour {
 
     public void jump()
     {
-        if (jumpcount>0)
+
+        if (jumpcount > 0)
         {
-            if (jumpcount == 1)
+            if (landed)
             {
-                VerticalSpeed = doubleJumpPower;
-                print("double jump");
-            } else { 
                 VerticalSpeed = jumpPower;
                 print("jump !");
+                print(jumpcount);
+                jumpcount -= 1;
+            }
+            else
+            {
+                if (right)
+                {
+                    VerticalSpeed = jumpPower;
+                    horizontalSpeed = jumpPowerSide;
+                }
+                else if (left)
+                {
+                    VerticalSpeed = jumpPower;
+                    horizontalSpeed = -jumpPowerSide;
+                }
+                else
+                {
+                    VerticalSpeed = jumpPower;
+                    print("jump !");
+                    print(jumpcount);
+                    jumpcount -= 1;
+                }
             }
 
-            print(jumpcount);
-            jumpcount -= 1;
+
         }
+
+
+    }
+
+    void updateHorizontalSpeed()
+    {
         
     }
 
     public float getVerticalSpeed()
     {
         return VerticalSpeed;
+    }
+
+    public float getHorizontalSpeed()
+    {
+        return horizontalSpeed;
     }
     // Use this for initialization
     void Start () {
@@ -232,13 +287,17 @@ public class character : MonoBehaviour {
         time = 0;
         distance = 15f;
         landed = false;
+        right = false;
+        left = false;
         VerticalSpeed = 0;
         jumpcount = 2;
+        horizontalSpeed = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         gravity();
+        updateHorizontalSpeed();
         //print(landed);
 	}
 }
