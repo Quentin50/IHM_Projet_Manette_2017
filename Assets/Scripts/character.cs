@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class character : MonoBehaviour {
 
-   
-    
+
     
     public float g;
     public float jumpPower, doubleJumpPower, wallJumpPower;
@@ -200,23 +199,75 @@ public class character : MonoBehaviour {
 
         float minY = Mathf.Max(val7, val8, val9) + height + MinXDistWithObjects;
 
+        float valMin = val7;
+        if(valMin-minY > valMin - val8)
+        {
+            valMin = val8;
+        }
+        if(valMin - minY > valMin - val9)
+        {
+            valMin = val9;
+        }
+            
+
         if (this.gameObject.transform.position.y - minY <= anticipateJump)
         {
+            print("entering loop");
+            GameObject platf = null;
+            PlateformeMouvante pltfmvt = null;
             landed = true;
             horizontalSpeed = 0;
-            //print("landed true");
+            if (val7 == valMin)
+            {
+                platf = hit7.collider.gameObject;
+                print("min = hit7");
+            }
+            else if (val8 == valMin)
+            {
+                platf = hit8.collider.gameObject;
+                print("min = hit8");
+            }
+            else if (val9 == valMin)
+            {
+                platf = hit9.collider.gameObject;
+                print("min = hit9");
+            }
+
+            if (platf)
+            {
+                pltfmvt = platf.GetComponent<PlateformeMouvante>();
+                print("platf found");
+            }
+            if (pltfmvt)
+            {
+                if (pltfmvt.ToTheRight)
+                {
+                    horizontalSpeed = pltfmvt.Speed.x * Time.deltaTime;
+                } else
+                {
+                    horizontalSpeed = - pltfmvt.Speed.x * Time.deltaTime;
+                }
+               
+                print("script platfmvt found");
+                print("horizontalspeed set to      " + horizontalSpeed);
+            }
+
             if (this.VerticalSpeed <= 0)
             {
                 jumpcount = 2;
             }
-           
-            
-        } else
+
+
+        }
+        else
         {
             landed = false;
+            horizontalSpeed = 0;
         }
         return minY;
+
         
+
     }
 
 
