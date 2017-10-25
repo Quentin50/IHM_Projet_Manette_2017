@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class input_controller : MonoBehaviour {
 
-    
+
+    public float horizontalSpeed, horizontalSpeedInAir;
+
+    private float currentSpeed;
+
     //void inputColor()
     //{
     //    if (Input.GetButton("Fire1"))
     //    {
     //        //this.gameObject.GetComponent<Renderer>().material.color = Color.green;
-           
+
     //    } else if (Input.GetButton("Fire2"))
     //    {
     //        this.gameObject.GetComponent<Renderer>().material.color = Color.red;
@@ -78,7 +82,12 @@ public class input_controller : MonoBehaviour {
         if (h != 0)
         {
             //print("input");
-            Vector3 pos = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * 5 + this.gameObject.GetComponent<character>().getHorizontalSpeed(), this.gameObject.GetComponent<character>().getVerticalSpeed(), 0);
+            
+            // check if the cube is in air
+            if (!this.gameObject.GetComponent<character>().getLanded()) currentSpeed = horizontalSpeedInAir;
+            else currentSpeed = horizontalSpeed;
+
+            Vector3 pos = this.gameObject.transform.position + new Vector3(h * Time.deltaTime * currentSpeed + this.gameObject.GetComponent<character>().getHorizontalSpeed(), this.gameObject.GetComponent<character>().getVerticalSpeed(), 0);
             pos.x = Mathf.Clamp(pos.x, minX, maxX);
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
             this.gameObject.transform.position = pos;
@@ -95,8 +104,9 @@ public class input_controller : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-	}
+        currentSpeed = horizontalSpeed;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

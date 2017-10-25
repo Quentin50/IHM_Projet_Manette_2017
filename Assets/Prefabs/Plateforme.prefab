@@ -78,11 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243b7f6c4222ec0479ff30caabeee528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: {x: 1, y: 1}
-  XOscilDist: 6
-  YOscilDist: 5
+  Speed: {x: 0, y: 0}
+  XOscilDist: 0
+  YOscilDist: 0
   ToTheRight: 0
-  ToTheTop: 1
+  ToTheTop: 0
 --- !u!212 &212746506768882460
 SpriteRenderer:
   m_ObjectHideFlags: 1
