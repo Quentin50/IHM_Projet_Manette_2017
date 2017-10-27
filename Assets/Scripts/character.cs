@@ -73,7 +73,6 @@ public class character : MonoBehaviour {
         if (this.gameObject.transform.position.x - minX <= anticipateWallJump)
         {
             right = true;
-            print("right true");
         }
         else
         {
@@ -119,7 +118,6 @@ public class character : MonoBehaviour {
         if (maxX - this.gameObject.transform.position.x <= anticipateWallJump)
         {
             left = true;
-            print("left true");
         }
         else
         {
@@ -212,7 +210,6 @@ public class character : MonoBehaviour {
 
         if (this.gameObject.transform.position.y - minY <= anticipateJump)
         {
-            print("entering loop");
             GameObject platf = null;
             PlateformeMouvante pltfmvt = null;
             landed = true;
@@ -220,23 +217,19 @@ public class character : MonoBehaviour {
             if (val7 == valMin)
             {
                 platf = hit7.collider.gameObject;
-                print("min = hit7");
             }
             else if (val8 == valMin)
             {
                 platf = hit8.collider.gameObject;
-                print("min = hit8");
             }
             else if (val9 == valMin)
             {
                 platf = hit9.collider.gameObject;
-                print("min = hit9");
             }
 
             if (platf)
             {
                 pltfmvt = platf.GetComponent<PlateformeMouvante>();
-                print("platf found");
             }
             if (pltfmvt)
             {
@@ -248,8 +241,7 @@ public class character : MonoBehaviour {
                     horizontalSpeed = - pltfmvt.Speed.x * Time.deltaTime;
                 }
                
-                print("script platfmvt found");
-                print("horizontalspeed set to      " + horizontalSpeed);
+                
             }
 
             if (this.VerticalSpeed <= 0)
@@ -310,8 +302,7 @@ public class character : MonoBehaviour {
             if (landed)
             {
                 VerticalSpeed = jumpPower;
-                print("jump !");
-                print(jumpcount);
+                
                 jumpcount -= 1;
             }
             else
@@ -329,8 +320,7 @@ public class character : MonoBehaviour {
                 else
                 {
                     VerticalSpeed = doubleJumpPower;
-                    print("jump !");
-                    print(jumpcount);
+                  
                     jumpcount -= 1;
                 }
             }

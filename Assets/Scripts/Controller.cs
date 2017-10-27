@@ -11,7 +11,6 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(Input.GetButton("A"));
         if (Input.GetButton("A"))
         {
             handleA();
